@@ -4,7 +4,7 @@ from datetime import datetime
 
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),"dental_stock.db")
 
-def documentation ():
+def summary ():
     """_summary_
      Este ficheiro utiliza sqlite3 que ve incluído em python.
      Utiliza biblioteca 'os' para construir o caminho do ficheiro
@@ -20,10 +20,6 @@ def documentation ():
      def criar_tabelas users e materiais. Cada material vai ter um user_id associado ao registro e data.
      Crio já por definição o login do admin.
 
-
-
-    Returns:
-        _type_: _description_
     """
 
 CATEGORIAS = ["Consumiveis","Dentisteria","Cirurgia","Endodontia","Prostodontia"]
