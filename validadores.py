@@ -20,8 +20,13 @@ def summary():
       1ª verifica se o tamanho é menor que 8, depois verifica se existe 1 caractere maiúsculo, 1 minúsculo 1 número e 1 caractere especial dentre os selecionados.
       Retorna True or False de acordo com o input recebido
 
+      def valida data -  recebe a data no formato DATE PATTERN e primeiro valida se esta vazio.
+      Depois verifica se está no formato correto. Retorna True se estiver tudo ok.
 
-
+      def validar_antiguidade - Utilizo o unpacking para separar os valores da tupla em variaveis individuais sendo "ok=False" e "msg=True".
+      a variável integração converte a string para um obj datetime para fazer calculos com as datas.
+      depois faco o calculo para obter a diferença de anos e depois meses, sendo que é necessário ter 3 meses completos na empresa.
+      Verifico então se a já tem 3 meses de contrato para retornar True or False.
 
     """
 
@@ -42,7 +47,7 @@ def validar_email(email:str) -> tuple:
 
 
 def validar_password(password:str) -> tuple:
-    if not len(password)< 8:
+    if not len(password)>= 8 :
         return False, "A password deve ter pelo menos 8 caracteres."
     if not re.search(r"[A-Z]",password):
         return False,"A password deve conter pelo menos 1 letra maiúscula"
@@ -54,11 +59,39 @@ def validar_password(password:str) -> tuple:
         return False,"A password deve conter pelo menos 1 caractere especial entre estes ! ? @ # $ % ^ & * ( ) _ + \ - = "
     return True,""
 
+def validar_data(data:str) -> tuple:
+    if not re.match(DATE_PATTERN,data.strip()):
+        return False, "Formato de data inválido. Use o formato DD-MM-AAAA !"
+    
+    try:
+        datetime.strptime(data.strip(), "%d-%m-%Y")
+    except ValueError:
+        return False,"Data inválida ! Verifique o dia e o mês introduzidos"
+    return True, ""
 
 
-##### Continuar validacoes 
+def validar_antiguidade(data_integracao: str) -> tuple:
+    ok, msg = validar_data(data_integracao)
+    if not ok:
+        return False, msg
+    
+    integracao = datetime.strptime(data_integracao.strip(), "%d-%m-%Y")
+    
+    hoje = datetime.now()
 
-# criar def de validar data e validar_antiguidade. Testar no fim com prints no main 
+    calcular_meses = (hoje.year - integracao.year) * 12 + (hoje.month - integracao.month)
+    if hoje.day < integracao.day:
+        calcular_meses -= 1
+    if calcular_meses < 3 :
+        return False, (f" São necessários pelo menos 3 meses na empresa para criar login. A data {data_integracao} tem apenas {calcular_meses} mês(es).")
+    return True, ""                                   
+
+
+
+
+
+
+    
 
 
 

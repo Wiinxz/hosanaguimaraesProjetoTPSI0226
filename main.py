@@ -4,12 +4,15 @@ import sys
 sys.path.insert(0,os.path.dirname(__file__))
 
 import database as db
+import validadores as validadores
 
 #teste criação database
 
 if __name__ == "__main__":
-    db.criar_tabelas()
-    print("Hello Word")
+    print(validadores.validar_email("admin@clinica.pt"))
+    print(validadores.validar_password("Ana121!1"))
+    print(validadores.validar_data("00-00-0000"))
+    print(validadores.validar_antiguidade("24-01-2026"))
 
 
 
