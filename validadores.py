@@ -30,9 +30,9 @@ def summary():
 
     """
 
-EMAIL_PATTERN = r"^[a-zA-Z0-9.-_+]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+EMAIL_PATTERN = r"^[a-zA-Z0-9.-_+]+@[a-zA-Z0-9./-]+\.[a-zA-Z]{2,}$"
 
-PASSWORD_PATTERN = r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!?@#$%^&*()_+\-=]).{8,}$"
+PASSWORD_PATTERN = r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!?@#$%^&*()_+/-=])[a-zA-Z0-9!?@#$%^&*()_+/-=]{8,}$"
 
 DATE_PATTERN = r"^(0[1-9]|[12]\d|3[01])-(0[1-9]|1[0-2])-(\d{4})$"
 
@@ -55,8 +55,10 @@ def validar_password(password:str) -> tuple:
         return False,"A password deve conter pelo menos 1 letra minúscula"
     if not re.search(r"\d",password):
         return False,"A password deve conter pelo menos 1 número"
-    if not re.search(r"[!?@#$%^&*()_+\-=]",password):
+    if not re.search(r"[!?@#$%^&*()_+/-=]",password):
         return False,"A password deve conter pelo menos 1 caractere especial entre estes ! ? @ # $ % ^ & * ( ) _ + \ - = "
+    if not re.search(r"^[a-zA-Z0-9!?@#$%^&*()_+\-=]{8,}$",password):
+        return False, "A password contém caracteres inválidos. Use apenas letras, números e os símbolos: ! ? @ # $ % ^ & * ( ) _ + - ="
     return True,""
 
 def validar_data(data:str) -> tuple:
