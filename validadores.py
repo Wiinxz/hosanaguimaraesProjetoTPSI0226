@@ -43,6 +43,8 @@ def validar_email(email:str) -> tuple:
         return False, "Obrigatório inserir um email !"
     if not re.match(EMAIL_PATTERN,email.strip()): #Lembrar que retorna na verdade None...Mas None é True
         return False,"Email ínvalido! utilize o formato esperado: user@user.com"
+    if not re.search(r"^[a-zA-Z0-9.-_+/]",email.strip()):
+        return False, "O email tem que conter caracteres válidos. Use apenas letras, números e os símbolos:_ + - . / "
     return True,""
 
 
