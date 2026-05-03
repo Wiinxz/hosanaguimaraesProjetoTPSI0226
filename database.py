@@ -22,7 +22,7 @@ def summary ():
 
      def criar_utilizador recebe os valores passados e executa a criação na database. Retorna False caso o utilizador já esteja criado na database
 
-     def autenticar recebe email e password e valida se corresponde ao que está na database executando uma query e retornando tru or false  
+     def autenticar recebe email e password e valida se corresponde ao que está na database executando uma query e retornando tru or false. Crio variável row para fazer o select no database apenas e uso fetchone para devolver 1 ou none 
 
     """
 
