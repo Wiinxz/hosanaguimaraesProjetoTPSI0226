@@ -20,8 +20,8 @@ def summary ():
     depois pede password e pega os 2 dados e coloca na variavel utlizador que chama o método autenticar passando emaile pass, se true depois passa os valores para o dicionario session mostra mensagem de bem vindo e retorna True, 
     se nao retorna False e menssagem de erro.
 
-
-
+    def criar_conta recebe um input email e transforma em strip e depois pede password (input) e valida novamente, depois pede a data de integração para ver se já esta há pelo menos 3 meses na clinica.
+    utilizo o unpacking novamente para separar os valores da tupla em variaveis individuais sendo "resposta=False" e "sucess=True" chamo a def criar_utilizador para inserir depois na DB.
     """
 
 # funções da minha sessão
@@ -80,6 +80,10 @@ def criar_conta():
     if not ok:
         print(f"ERRO ! {msg}")
         return
+    
+    password_confirmation = input("Digite novamente a password para confirmar: ").strip()
+    if password != password_confirmation:
+        print("ERRO ! As passwords não coincidem !")
     
     data= input("Data de integração (DD - MM - AAAA) : ").strip()
     ok,msg = validar_antiguidade(data)
