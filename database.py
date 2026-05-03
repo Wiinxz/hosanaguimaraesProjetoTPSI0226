@@ -20,6 +20,10 @@ def summary ():
      def criar_tabelas users e materiais. Cada material vai ter um user_id associado ao registro e data.
      Crio já por definição o login do admin.
 
+     def criar_utilizador recebe os valores passados e executa a criação na database. Retorna False caso o utilizador já esteja criado na database
+
+     def autenticar recebe email e password e valida se corresponde ao que está na database executando uma query e retornando tru or false  
+
     """
 
 CATEGORIAS = ["Consumiveis","Dentisteria","Cirurgia","Endodontia","Prostodontia"]
@@ -57,6 +61,29 @@ def criar_tabelas():
             VALUES ('admin@clinica.pt','Admin123.','01-01-2020','admin')
         """)
 
+def criar_utilizador(email,password,data_integracao, role="user"):
+
+    try:
+        with get_connection() as conn:
+            conn.execute(
+                "INSERT INTO users (email, password, data_integracao,role) VALUES (?,?,?,?)",
+                (email,password,data_integracao,role)
+            )
+            
+            return True, "Utilizador criado com sucesso."
+    except sqlite3.IntegrityError :
+        return False, "Este email á está registrado no sistema."
+    
+def autenticar (email, password):
+
+    with get_connection() as conn:
         
+        row = conn.execute(
+            "SELECT id, email, role FROM users WHERE email = ? AND password = ?",(email,password)
+        ).fetchone()
+    
+    return row    
+    
+
 
         
