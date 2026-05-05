@@ -36,6 +36,8 @@ if __name__ == "__main__":
     #print(f"Teste logout:{authentic.logout()}")
     
     #print(f"Sessão ainda ativa? {authentic.sessao_ativa()}")
+
+    #NÃO ESQUECER ! APENAS O ADMIN PODE DELETAR PRODUTOS LEMBRAR QUANDO CONTRUIR O ' MAIN '
     
 
 
