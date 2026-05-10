@@ -7,6 +7,8 @@ import database as db
 
 import validadores as validadores
 import authentic as authentic
+import users_repository as users_repository
+import materials_repository as materials_repository
 
 
 #teste criação database
@@ -26,8 +28,8 @@ if __name__ == "__main__":
     #print("Teste criar conta ")
     #authentic.criar_conta()
 
-    # print("Teste login")
-    # authentic.login()
+    #print("Teste login")
+    #authentic.login()
 
     #print(f"Teste sessão ativa: {authentic.sessao_ativa()}")
     #print(f"Teste admin: {authentic.is_admin()}")
@@ -36,6 +38,9 @@ if __name__ == "__main__":
     #print(f"Teste logout:{authentic.logout()}")
     
     #print(f"Sessão ainda ativa? {authentic.sessao_ativa()}")
+    
+    #print("teste criar material ")
+    #print(materials_repository.criar_material("Pasta Sensodyne","1.59","Consumiveis","100","50","1"))
 
     #NÃO ESQUECER ! APENAS O ADMIN PODE DELETAR PRODUTOS LEMBRAR QUANDO CONSTRUIR O ' MAIN '
     #Talvez implementar adição e remoção de usuários? fazer validação para que o admin não possa se remover

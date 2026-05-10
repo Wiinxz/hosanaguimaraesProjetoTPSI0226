@@ -3,11 +3,15 @@ import os
 import sqlite3
 import database as data
 
-
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),"dental_stock.db")
+from database import get_connection,CATEGORIAS
+"""DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),"dental_stock.db")
 
 def get_connection():
-    return sqlite3.connect(DB_PATH)
+    return sqlite3.connect(DB_PATH)"""
+
+def summary():
+    """_summary_
+    """
 
 def criar_utilizador(email,password,data_integracao, role="user"):
 
