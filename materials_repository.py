@@ -41,4 +41,17 @@ def materials_update(id,nome,valor,categoria,stock,stock_minino):
         conn.execute(
             "UPDATE materiais SET nome=?, valor=?, categoria=?, stock=?, stock_minimo=?, WHERE id=?",(nome,valor,categoria,stock,stock_minino,id)
         )
+
+def remove_materials(id:int):
+  
+  with get_connection() as conn:
+      conn.execute("DELETE FROM materiais WHERE id=?",(id,))
+
+def search_linear_name(nome_search: str):
     
+    resultado = []
+    for n in listar_tudo():
+        if nome_search.lower() in n[1].lower():
+            resultado.append(n)
+    
+    return resultado

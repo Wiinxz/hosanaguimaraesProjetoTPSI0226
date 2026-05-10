@@ -9,6 +9,7 @@ import validadores as validadores
 import authentic as authentic
 import users_repository as users_repository
 import materials_repository as materials_repository
+import interface as interface
 
 
 #teste criação database
@@ -28,9 +29,10 @@ if __name__ == "__main__":
     #print("Teste criar conta ")
     #authentic.criar_conta()
 
-    #print("Teste login")
-    #authentic.login()
-
+    print("Teste login")
+    authentic.login()
+    
+    interface.menu_principal()
     #print(f"Teste sessão ativa: {authentic.sessao_ativa()}")
     #print(f"Teste admin: {authentic.is_admin()}")
 
