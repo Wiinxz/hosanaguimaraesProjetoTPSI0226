@@ -4,7 +4,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from validadores import validar_email, validar_password, validar_antiguidade
-from database import criar_utilizador, autenticar
+from users_repository import criar_utilizador, autenticar
 
 def summary ():
     """

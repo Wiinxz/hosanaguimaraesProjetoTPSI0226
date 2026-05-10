@@ -37,7 +37,9 @@ if __name__ == "__main__":
     
     #print(f"Sessão ainda ativa? {authentic.sessao_ativa()}")
 
-    #NÃO ESQUECER ! APENAS O ADMIN PODE DELETAR PRODUTOS LEMBRAR QUANDO CONTRUIR O ' MAIN '
+    #NÃO ESQUECER ! APENAS O ADMIN PODE DELETAR PRODUTOS LEMBRAR QUANDO CONSTRUIR O ' MAIN '
+    #Talvez implementar adição e remoção de usuários? fazer validação para que o admin não possa se remover
+    
     
 
 
