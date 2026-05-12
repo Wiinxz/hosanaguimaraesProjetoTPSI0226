@@ -8,7 +8,7 @@ import database as db
 import validadores as validadores
 import authentic as authentic
 import users_repository as users_repository
-import materials_repository as materials_repository
+import materials_repository as repo
 import interface as interface
 
 
@@ -29,10 +29,22 @@ if __name__ == "__main__":
     #print("Teste criar conta ")
     #authentic.criar_conta()
 
-    print("Teste login")
-    authentic.login()
+    #print("Teste login")
+    #authentic.login()
     
-    interface.menu_principal()
+    #interface.menu_principal()
+    listando = repo.listar_tudo()
+    print(listando)
+
+    #procura_id = int(input("insere um ID"))
+    #print(repo.search_from_id(procura_id))
+
+    atualiza_material = int(input("insere um ID: "))
+    #print(repo.search_from_id(atualiza_material))
+    
+    #print(repo.materials_update("Pasta Colgate", 1.98, "Consumiveis", 120, 50, 1))
+    repo.remove_materials(atualiza_material)
+
     #print(f"Teste sessão ativa: {authentic.sessao_ativa()}")
     #print(f"Teste admin: {authentic.is_admin()}")
 

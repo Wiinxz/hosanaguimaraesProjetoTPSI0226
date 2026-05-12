@@ -35,17 +35,19 @@ def criar_material(nome,valor,categoria,stock,stock_minimo,user_id):
         conn.commit()
         return "Produto inserido com sucesso !"
     
-def materials_update(id,nome,valor,categoria,stock,stock_minino):
+def materials_update(nome,valor,categoria,stock,stock_minino,id):
     
     with get_connection() as conn:
         conn.execute(
-            "UPDATE materiais SET nome=?, valor=?, categoria=?, stock=?, stock_minimo=?, WHERE id=?",(nome,valor,categoria,stock,stock_minino,id)
+            "UPDATE materiais SET nome=?, valor=?, categoria=?, stock=?, stock_minimo=? WHERE id=?",(nome,valor,categoria,stock,stock_minino,id)
         )
 
 def remove_materials(id:int):
   
   with get_connection() as conn:
       conn.execute("DELETE FROM materiais WHERE id=?",(id,))
+    
+      return "Produto removido com sucesso !"
 
 def search_linear_name(nome_search: str):
     
@@ -55,3 +57,20 @@ def search_linear_name(nome_search: str):
             resultado.append(n)
     
     return resultado
+
+def search_linear_id(id:int):
+    
+    all = listar_tudo()
+    esq,dir = 0,len(all) -1
+
+    while esq <= dir:
+        meio = (esq+dir) // 2
+        
+        if all[meio][0] == id:
+            return all[meio]
+        
+        elif all[meio][0] < id:
+            esq = meio + 1
+        else: 
+            id = meio - 1
+    return None 

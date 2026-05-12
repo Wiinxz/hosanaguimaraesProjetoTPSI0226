@@ -5,6 +5,7 @@ import os
 import authentic as authentic
 
 def menu_principal():
+    
     print("\n╔══════════════════════════════════════════╗")
     print("║        MENU PRINCIPAL                    ║")
     print("╠══════════════════════════════════════════╣")
