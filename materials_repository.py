@@ -102,6 +102,24 @@ def selection_sort_ord_by_stock(dados:list,campo:str) -> list:
                 arr[l],arr[min] = arr[min],arr[l]
     return arr
 
+def statistics():
+    todos = listar_tudo()
+    
+    if not todos:
+        return None
+
+    valores = [p[2] for p in todos]
+    stocks  = [p[4] for p in todos]
+
+    return {
+        "total"        : len(todos),
+        "valor_medio"  : sum(valores) / len(valores),
+        "valor_max"    : max(valores),
+        "valor_min"    : min(valores),
+        "stock_total"  : sum(stocks),
+        "abaixo_minimo": [m for m in todos if m[4] <= m[5]]
+    }
+
 def search_linear_id(id:int):
     
     all = listar_tudo()

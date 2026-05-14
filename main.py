@@ -20,16 +20,14 @@ def loop_inicial():
             case "1":
                materials = repo.listar_tudo()
                interface.mostrar_lista(materials)
-                
+
             case "2":
-               pesquisa = pesquisar()
-               interface.mostrar_lista(pesquisa)
-
+               pesquisar()
             case "3":
-                ordem = ordenar()
-
+                ordenar()
+                #trocar o ordenar por categoria para ordenar por data... está redundante
             case "4":
-                implementar_estatisticas()
+                 estatisticas()
             case "5":
                 implementar_editar()
             case "6":
@@ -95,6 +93,38 @@ def ordenar():
         
         result = repo.selection_sort_ord_by_stock(repo.listar_tudo(),"categoria")
         interface.mostrar_lista(result,"ORDENADO POR CATEGORIA")
+
+def estatisticas():
+    
+    estatisticas = interface.menu_estatisticas()
+
+    if estatisticas == "1":
+        
+        stats = repo.statistics()
+        if not stats:
+            print("[INFO] Sem dados para calcular.")
+            return
+        
+        print("\n=== RESUMO ESTATÍSTICO ===")
+        print(f"  Total de registos : {stats['total']}")
+        print(f"  Valor médio       : {stats['valor_medio']:.2f}€")
+        print(f"  Valor máximo      : {stats['valor_max']:.2f}€")
+        print(f"  Valor mínimo      : {stats['valor_min']:.2f}€")
+        print(f"  Stock total       : {stats['stock_total']} unidades")
+        print(f"  Abaixo do mínimo  : {len(stats['abaixo_minimo'])} material(is) ")
+
+    elif estatisticas == "2":
+        
+        stats = repo.statistics()
+        if not stats:
+            print("[INFO] Sem dados.")
+            return
+        interface.mostrar_lista(stats["abaixo_minimo"], "STOCK ABAIXO DO MÍNIMO !")
+    
+    else:
+        return
+
+
 
 if __name__ == "__main__":
  def testes():
