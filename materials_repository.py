@@ -22,7 +22,7 @@ def search_from_id (id:int):
     with get_connection() as conn:
         return conn.execute(
             "SELECT id,nome,valor,categoria,stock,stock_minimo,data_registro FROM materiais WHERE id = ?",(id,)
-        )
+        ).fetchone()
 
 def criar_material(nome,valor,categoria,stock,stock_minimo,user_id):
     
@@ -57,6 +57,14 @@ def search_linear_name(nome_search: str):
             resultado.append(n)
     
     return resultado
+
+def search_by_category(categoria: str):
+    
+    with get_connection() as conn:
+        return conn.execute(
+            "SELECT id, nome, valor, categoria, stock, stock_minimo, data_registro FROM materiais WHERE categoria = ? ORDER BY nome",
+            (categoria,)
+        ).fetchall()
 
 def search_linear_id(id:int):
     

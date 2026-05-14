@@ -21,8 +21,12 @@ def loop_inicial():
                 materials = repo.listar_tudo()
                 #print(materials)
                 interface.mostrar_lista(materials)
+                
             case "2":
-                implementar_pesquisar()
+               pesquisa_id = pesquisa_por_ID()
+               #print(repo.search_from_id(pesquisa_id))
+               interface.mostrar_lista(pesquisa_id)
+
             case "3":
                 implementar_ordenar()
             case "4":
@@ -43,7 +47,7 @@ def listar():
   materials = repo.listar_tudo()
   interface.mostrar_lista(materials)
 
-def pesquisa ():
+def pesquisa_por_ID ():
   
   op = interface.menu_pesquisa()
   if op == "1":
@@ -61,8 +65,6 @@ def pesquisa ():
         else:
            print(f"Matérial com o ID {idi} não encontrado") 
     
-
-
 
 
 if __name__ == "__main__":

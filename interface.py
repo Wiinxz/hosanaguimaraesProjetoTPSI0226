@@ -118,9 +118,11 @@ def mostrar_lista(materiais, titulo="LISTA DE MATERIAIS"):
         titulo (str): Título a mostrar acima da tabela.
     """
     if not materiais:
+
         print("\n[INFO] Nenhum registo encontrado.")
         return
-    print(f"\n══ {titulo} ══  ({len(materiais)} registo(s))")
+    
+    print(f"\n═{titulo} ═  ({len(materiais)} registo(s))")
     cabecalho_tabela()
     for m in materiais:
         linha_material(m)
