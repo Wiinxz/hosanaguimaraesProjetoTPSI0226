@@ -29,7 +29,7 @@ def loop_inicial():
             case "4":
                  estatisticas()
             case "5":
-                implementar_editar()
+                editar() #Criar o editar
             case "6":
                 implementar_adicionar()
             case "7":
@@ -123,6 +123,8 @@ def estatisticas():
     
     else:
         return
+
+def editar():
 
 
 
