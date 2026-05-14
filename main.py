@@ -5,7 +5,7 @@ sys.path.insert(0,os.path.dirname(__file__))
 
 import database as db
 import validadores as validadores
-import authentic as authentic
+import authentic as auth
 import users_repository as users_repository
 import materials_repository as repo
 import interface as interface
@@ -19,13 +19,11 @@ def loop_inicial():
     match op:
             case "1":
                 materials = repo.listar_tudo()
-                #print(materials)
                 interface.mostrar_lista(materials)
                 
             case "2":
-               pesquisa_id = pesquisa_por_ID()
-               #print(repo.search_from_id(pesquisa_id))
-               interface.mostrar_lista(pesquisa_id)
+               pesquisa = pesquisar()
+               interface.mostrar_lista(pesquisa)
 
             case "3":
                 implementar_ordenar()
@@ -47,7 +45,7 @@ def listar():
   materials = repo.listar_tudo()
   interface.mostrar_lista(materials)
 
-def pesquisa_por_ID ():
+def pesquisar():
   
   op = interface.menu_pesquisa()
   if op == "1":
@@ -64,8 +62,26 @@ def pesquisa_por_ID ():
            interface.mostrar_lista([result], "Resultado por ID")       
         else:
            print(f"Matérial com o ID {idi} não encontrado") 
-    
 
+  if op == "2":
+        
+         nome = input("Nome a pesquisar: ")
+         result = repo.search_linear_name(nome)
+         
+         if result :
+           interface.mostrar_lista(result, "Resultado por Nome")       
+         else:
+           print(f"Matérial com o Nome {nome} não encontrado") 
+   
+  if op == "3":
+        
+         nome = input("Categoria a pesquisar: ")
+         result = repo.search_by_category(nome)
+         
+         if result :
+           interface.mostrar_lista(result, "Resultado por Categoria")       
+         else:
+           print(f"Matérial na Categoria {nome} não encontrado") 
 
 if __name__ == "__main__":
  def testes():
@@ -120,7 +136,7 @@ if __name__ == "__main__":
 
 db.criar_tabelas()
 
-if authentic.login():
+if auth.login():
   loop_inicial()
 
   

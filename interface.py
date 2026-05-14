@@ -3,6 +3,7 @@ import sys
 import os
 
 import authentic as auth
+import materials_repository as repo
 
 def menu_principal():
 
@@ -119,7 +120,7 @@ def mostrar_lista(materiais, titulo="LISTA DE MATERIAIS"):
     """
     if not materiais:
 
-        print("\n[INFO] Nenhum registo encontrado.")
+        print("\n")
         return
     
     print(f"\n═{titulo} ═  ({len(materiais)} registo(s))")
