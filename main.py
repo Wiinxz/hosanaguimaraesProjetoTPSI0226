@@ -18,15 +18,16 @@ def loop_inicial():
 
     match op:
             case "1":
-                materials = repo.listar_tudo()
-                interface.mostrar_lista(materials)
+               materials = repo.listar_tudo()
+               interface.mostrar_lista(materials)
                 
             case "2":
                pesquisa = pesquisar()
                interface.mostrar_lista(pesquisa)
 
             case "3":
-                implementar_ordenar()
+                ordem = ordenar()
+
             case "4":
                 implementar_estatisticas()
             case "5":
@@ -38,7 +39,6 @@ def loop_inicial():
             case "0":
                 auth.logout()
                 break
-       #continuar  amanha os case 2 e os restantes 
 
 def listar():
   
@@ -82,6 +82,19 @@ def pesquisar():
            interface.mostrar_lista(result, "Resultado por Categoria")       
          else:
            print(f"Matérial na Categoria {nome} não encontrado") 
+
+def ordenar():
+    ordem = interface.menu_ordenacao()
+
+    if ordem == "stock":
+        stock = repo.bubble_sort_ord_by_name(repo.listar_tudo(),"stock")
+        interface.mostrar_lista(stock,"ORDENADO POR STOCK")
+
+    if ordem == "categoria":
+        cat = input("Categoria a pesquisar: ")
+        
+        result = repo.selection_sort_ord_by_stock(repo.listar_tudo(),"categoria")
+        interface.mostrar_lista(result,"ORDENADO POR CATEGORIA")
 
 if __name__ == "__main__":
  def testes():

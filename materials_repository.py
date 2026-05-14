@@ -66,6 +66,42 @@ def search_by_category(categoria: str):
             (categoria,)
         ).fetchall()
 
+def bubble_sort_ord_by_name(dados:list,campo:str) -> list :
+
+    arr = list(dados)
+    ind = {"id": 0, "nome": 1, "valor": 2, "categoria": 3, "stock": 4}[campo]
+    t = len(arr)
+
+    for l in range(t):
+        for c in range (0,t - l - 1):
+            a,b = arr[c][ind],arr[c+1][ind]
+
+            if isinstance(a,str):
+                a,b = a.lower(), b.lower()
+            if a > b :
+                arr[c], arr[c + 1] = arr[ l + 1], arr[l]
+    return arr
+
+def selection_sort_ord_by_stock(dados:list,campo:str) -> list:
+
+    arr = list(dados)
+    ind = {"id": 0, "nome": 1, "valor": 2, "categoria": 3, "stock": 4}[campo]
+    t = len(arr)
+
+    for l in range(t):
+        min = l 
+
+        for c in range(l + 1, t):
+            a,b = arr[c][ind], arr[min][ind]
+
+            if isinstance (a,str):
+                a,b = a.lower(), b.lower()
+            
+            if a > b:
+                min = c
+                arr[l],arr[min] = arr[min],arr[l]
+    return arr
+
 def search_linear_id(id:int):
     
     all = listar_tudo()
