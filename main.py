@@ -44,6 +44,10 @@ def loop_inicial():
                 remove()
               else:
                 print("[ERRO] Acesso negado. Apenas administradores.") 
+            
+            case "8":
+               if auth.is_admin():
+                   auth.criar_conta()
 
             case "0":
                 auth.logout()
@@ -116,7 +120,7 @@ def estatisticas():
             print("[INFO] Sem dados para calcular.")
             return
         
-        print("\n=== RESUMO ESTATÍSTICO ===")
+        print("\n═════ RESUMO ESTATÍSTICO ═════")
         print(f"  Total de registos : {stats['total']}")
         print(f"  Valor médio       : {stats['valor_medio']:.2f}€")
         print(f"  Valor máximo      : {stats['valor_max']:.2f}€")
@@ -235,10 +239,6 @@ def remove():
         print("[OK] Material removido com sucesso!")
     else:
         print("[INFO] Operação cancelada.")
-
-
-            
-
 
 
 if __name__ == "__main__":

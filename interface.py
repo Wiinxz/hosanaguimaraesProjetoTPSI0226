@@ -15,15 +15,16 @@ def menu_principal():
     print("║  3. Ordenar materiais                    ║")
     print("║  4. Estatísticas                         ║")
     print("║  5. Editar material                      ║")
+    print("║  0. Logout                               ║")
     print("║                                          ║")
     print("║  ── Área de Administração ──             ║")
     print("║  6. Adicionar material   [admin only]    ║")
     print("║  7. Remover material     [admin only]    ║")
-    print("║  0. Logout                               ║")
+    print("║  8. Criar Utilizador     [admin only]    ║")
     print("╚══════════════════════════════════════════╝")
     while True:
         op = input("Opção: ").strip()
-        if op in ["0","1","2","3","4","5","6","7"]:
+        if op in ["0","1","2","3","4","5","6","7","8"]:
             return op
         print("[ERRO] Escolha uma opção válida.")
 
