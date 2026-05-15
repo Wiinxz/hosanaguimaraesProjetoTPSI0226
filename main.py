@@ -103,11 +103,23 @@ def ordenar():
         stock = repo.bubble_sort_ord_by_name(repo.listar_tudo(),"stock")
         interface.mostrar_lista(stock,"ORDENADO POR STOCK")
 
-    if ordem == "categoria":
-        cat = input("Categoria a pesquisar: ")
+    if ordem == "data":
+
+        print("═════ TIPO DE ORDENAÇÃO ═════")
+        print(" [ 1 ] - Decrescente [mais novo - mais antigo] ")
+        print(" [ 2 ] - Crescente   [mais antigo - mais novo]")
         
-        result = repo.selection_sort_ord_by_stock(repo.listar_tudo(),"categoria")
-        interface.mostrar_lista(result,"ORDENADO POR CATEGORIA")
+        while True:
+            opc = input("\nEscolha a opção desejada: ").strip()
+            if opc in ["1","2"]:
+                break
+        
+        
+        result = repo.selection_sort_ord_by_stock(repo.listar_tudo(),"data_registro")
+        interface.mostrar_lista(result,"ORDENADO POR DATA")
+
+    if opc == 2:
+        result = result[::-1] # uso para inverter a lista
 
 def estatisticas():
     

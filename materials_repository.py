@@ -85,7 +85,7 @@ def bubble_sort_ord_by_name(dados:list,campo:str) -> list :
 def selection_sort_ord_by_stock(dados:list,campo:str) -> list:
 
     arr = list(dados)
-    ind = {"id": 0, "nome": 1, "valor": 2, "categoria": 3, "stock": 4}[campo]
+    ind = {"id": 0, "nome": 1, "valor": 2, "categoria": 3, "stock": 4,"data_registro":6}[campo]
     t = len(arr)
 
     for l in range(t):

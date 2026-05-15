@@ -51,12 +51,12 @@ def menu_ordenacao():
     print("║        ORDENAR POR                       ║")
     print("╠══════════════════════════════════════════╣")
     print("║  1. Stock                                ║")
-    print("║  2. Categoria                            ║")
+    print("║  2. Data de registro                     ║")
     print("╚══════════════════════════════════════════╝")
     while True:
         op = input("Opção: ").strip()
         if op == "1": return "stock"
-        elif op == "2": return "categoria"
+        elif op == "2": return "data"
         else: print("[ERRO] Escolha 1 ou 2.")
 
 def menu_estatisticas():
@@ -115,8 +115,8 @@ def menu_update():
 # organização das minhas tabelas aqui 
 def cabecalho_tabela():
     """Imprime o cabeçalho da tabela de materiais."""
-    print(f"\n{'ID':<5} {'Nome':<40} {'Valor':>8} {'Categoria':<15} {'Stock':>6} {'Mín.':>5}")
-    print("─" * 85)
+    print(f"\n{'ID':<5} {'Nome':<40} {'Valor':>8} {'Categoria':<15} {'Stock':>6} {'Mín.':>5} {'Data Registro':>15}")
+    print("─" * 105)
 
 def linha_material(m):
     """
@@ -127,7 +127,7 @@ def linha_material(m):
         m (tuple): Tuplo com os dados do material.
     """
     alerta = "⚠️" if m[4] <= m[5] else ""
-    print(f"{m[0]:<5} {m[1]:<40} {m[2]:>7.2f}€ {m[3]:<15} {m[4]:>5}{alerta} {m[5]:>5}{alerta}")
+    print(f"{m[0]:<5} {m[1]:<40} {m[2]:>7.2f}€ {m[3]:<15} {m[4]:>5}{alerta} {m[5]:>5}{alerta} {m[6]:>15}")
 
 def mostrar_lista(materiais, titulo="LISTA DE MATERIAIS"):
     """
@@ -146,7 +146,7 @@ def mostrar_lista(materiais, titulo="LISTA DE MATERIAIS"):
     cabecalho_tabela()
     for m in materiais:
         linha_material(m)
-    print("─" * 85)
+    print("─" * 105)
 
     #criar validação de inputs seguros? ver depois
 
