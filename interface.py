@@ -94,6 +94,25 @@ def escolher_categoria():
 
 # organização das minhas tabelas 
 
+def menu_update():
+    print("\n╔══════════════════════════════════════════╗")
+    print("║        QUAL CAMPO DESEJA ALTERAR?        ║")
+    print("╠══════════════════════════════════════════╣")
+    print("║  1. Nome                                 ║")
+    print("║  2. Valor                                ║")
+    print("║  3. Categoria                            ║")
+    print("║  4. Stock                                ║")
+    print("║  5. Stock mínimo                         ║")
+    print("╚══════════════════════════════════════════╝")
+    while True:
+        op = input("Opção: ").strip()
+        if op == "1": return "1"
+        elif op == "2": return "2"
+        elif op == "3": return "3"
+        elif op == "4": return "4"
+        elif op == "5": return "5"
+        else: print("[ERRO] Escolha uma opção entre 1 e 5.")
+
 def cabecalho_tabela():
     """Imprime o cabeçalho da tabela de materiais."""
     print(f"\n{'ID':<5} {'Nome':<40} {'Valor':>8} {'Categoria':<15} {'Stock':>6} {'Mín.':>5}")

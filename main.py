@@ -125,6 +125,43 @@ def estatisticas():
         return
 
 def editar():
+   
+   while True:
+            try:
+                id = int(input("ID do Material :"))
+                break
+            except ValueError:
+                print("[!ERRO!] Introduza um número inteiro.")
+
+   r = repo.search_from_id(id)
+   if r :
+      interface.mostrar_lista([r], "Resultado por ID")       
+   else:
+      print(f"Matérial com o ID {id} não encontrado") 
+
+   update = interface.menu_update()
+   
+   nome, valor, categoria, stock, stock_min = r[1], r[2], r[3], r[4], r[5]
+
+   match update:
+        case "1":
+            nome = input(f"Novo nome [{r[1]}]: ").strip() or r[1]
+        case "2":
+            valor = float(input(f"Novo valor [{r[2]}]: ") or r[2])
+        case "3":
+            categoria = input(f"Nova categoria [{r[3]}]: ").strip() or r[3]
+        case "4":
+            stock = int(input(f"Novo stock [{r[4]}]: ") or r[4])
+        case "5":
+            stock_min = int(input(f"Novo stock mín. [{r[5]}]: ") or r[5])
+
+    
+   repo.materials_update(nome, valor, categoria, stock, stock_min, id)
+   print(f"[OK] Material actualizado com sucesso!")
+
+
+
+
 
 
 
