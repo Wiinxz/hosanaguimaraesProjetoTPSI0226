@@ -92,8 +92,6 @@ def escolher_categoria():
         elif op == "5": return "Prostodontia"
         else: print("[ERRO] Escolha uma opção entre 1 e 5.")
 
-# organização das minhas tabelas 
-
 def menu_update():
     print("\n╔══════════════════════════════════════════╗")
     print("║        QUAL CAMPO DESEJA ALTERAR?        ║")
@@ -113,6 +111,7 @@ def menu_update():
         elif op == "5": return "5"
         else: print("[ERRO] Escolha uma opção entre 1 e 5.")
 
+# organização das minhas tabelas aqui 
 def cabecalho_tabela():
     """Imprime o cabeçalho da tabela de materiais."""
     print(f"\n{'ID':<5} {'Nome':<40} {'Valor':>8} {'Categoria':<15} {'Stock':>6} {'Mín.':>5}")
@@ -127,7 +126,7 @@ def linha_material(m):
         m (tuple): Tuplo com os dados do material.
     """
     alerta = "⚠️" if m[4] <= m[5] else ""
-    print(f"{m[0]:<5} {m[1]:<40} {m[2]:>7.2f}€ {m[3]:<15} {m[4]:>5}{alerta}")
+    print(f"{m[0]:<5} {m[1]:<40} {m[2]:>7.2f}€ {m[3]:<15} {m[4]:>5}{alerta} {m[5]:>5}{alerta}")
 
 def mostrar_lista(materiais, titulo="LISTA DE MATERIAIS"):
     """

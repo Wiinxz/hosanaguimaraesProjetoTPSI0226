@@ -23,17 +23,28 @@ def loop_inicial():
 
             case "2":
                pesquisar()
+
             case "3":
                 ordenar()
                 #trocar o ordenar por categoria para ordenar por data... está redundante
             case "4":
                  estatisticas()
+
             case "5":
                 editar() #Criar o editar
+
             case "6":
-                implementar_adicionar()
+             if auth.is_admin():
+                criar()
+             else:
+                print("[ERRO] Acesso negado. Apenas administradores.")              
+
             case "7":
-                implementar_remover()
+              if auth.is_admin():
+                remove()
+              else:
+                print("[ERRO] Acesso negado. Apenas administradores.") 
+
             case "0":
                 auth.logout()
                 break
@@ -147,9 +158,9 @@ def editar():
         case "1":
             nome = input(f"Novo nome [{r[1]}]: ").strip() or r[1]
         case "2":
-            valor = float(input(f"Novo valor [{r[2]}]: ") or r[2])
+            valor = input(f"Novo valor [{r[2]}]: ") or r[2]
         case "3":
-            categoria = input(f"Nova categoria [{r[3]}]: ").strip() or r[3]
+            categoria = interface.escolher_categoria()
         case "4":
             stock = int(input(f"Novo stock [{r[4]}]: ") or r[4])
         case "5":
@@ -159,9 +170,74 @@ def editar():
    repo.materials_update(nome, valor, categoria, stock, stock_min, id)
    print(f"[OK] Material actualizado com sucesso!")
 
+def criar():
+
+   print("\n═════ ADICIONAR MATERIAL ═════")
+
+   while True: # para o nome
+       nome = input("Insira o nome do Material : ").strip()
+       if nome:
+           break
+       print("[ERRO] O nome não pode estar vazio.")
+
+   while True: # para o valor
+       try:
+           valor = float(input("Insira o valor [FORMATO: 0.00] : "))
+           if valor > 0:
+               break
+           print("[ERRO] O valor tem de ser positivo.")
+       except ValueError:
+           print("[ERRO] Insere um número válido. Ex: 1.99")
+
+   categoria = interface.escolher_categoria()
+
+   while True: # para o stock inicial
+       try:
+           stock = int(input("Insira a quantidade inicial do matérial : "))
+           if stock >= 0 :
+               break
+           print("[ERRO] ATENÇÃO ! Stock não pode ser negativo.")
+       except ValueError:
+            print("[ERRO] Apenas válido números inteiros.")
+
+   while True:
+      try:
+          stock_min = int(input("Insira o stock mínimo necessário para este matérial: "))
+          if stock_min >= 0:
+              break
+          print("[ERRO] ATENÇÃO ! Stock mínimo não pode ser negativo.")
+      except ValueError:
+        print("[ERRO] Apenas válido números inteiros.")
+          
+   user_id = auth.session["id"]
+
+   repo.criar_material(nome,valor,categoria,stock,stock_min,user_id)
+
+   print("[OK] Material adicionado com sucesso!")
+
+def remove():
+
+    print("\n═════ REMOVER MATERIAL ═════")
+
+    id = int(input("Insira o ID do máterial a remover: "))
+
+    remove = repo.search_from_id(id)
+    interface.mostrar_lista([remove])
+
+    if not remove:
+        print(f"[ERRO] Material com ID {id} não encontrado.")
+        return
+    
+    confirmar = input("Tem certeza que deseja remover este máterial ? (s/n): ").strip().lower()
+
+    if confirmar == "s":
+        repo.remove_materials(id)
+        print("[OK] Material removido com sucesso!")
+    else:
+        print("[INFO] Operação cancelada.")
 
 
-
+            
 
 
 

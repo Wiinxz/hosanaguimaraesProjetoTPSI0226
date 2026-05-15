@@ -25,10 +25,10 @@ def summary ():
     """
 
 # funções da minha sessão
-session = {"email": None, "role": None}
+session = {"id":None,"email": None,"role": None,}
 
 def sessao_ativa():
-    return session["email"] is not None
+    return session["id"] is not None
 
 def is_admin():
     return session ["role"] == "admin"
@@ -54,6 +54,7 @@ def login ():
     
     if utilizador:
         
+        session["id"] = utilizador[0]
         session["email"] = utilizador[1]
         session["role"] = utilizador[2]
         print(f" Bem-vindo(a), {session['email']} ")
