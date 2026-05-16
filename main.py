@@ -26,7 +26,7 @@ def loop_inicial():
 
             case "3":
                 ordenar()
-                #trocar o ordenar por categoria para ordenar por data... está redundante
+                
             case "4":
                  estatisticas()
 
@@ -48,6 +48,8 @@ def loop_inicial():
             case "8":
                if auth.is_admin():
                    auth.criar_conta()
+               else:
+                    print("[ERRO] Acesso negado. Apenas administradores.")
 
             case "0":
                 auth.logout()
@@ -87,39 +89,42 @@ def pesquisar():
            print(f"Matérial com o Nome {nome} não encontrado") 
    
   if op == "3":
-        
-         nome = input("Categoria a pesquisar: ")
-         result = repo.search_by_category(nome)
          
+         categoria = interface.escolher_categoria()
+         result = repo.search_by_category(categoria)
+
          if result :
            interface.mostrar_lista(result, "Resultado por Categoria")       
          else:
-           print(f"Matérial na Categoria {nome} não encontrado") 
+           print(f"Matérial na Categoria {categoria} não encontrado") 
 
 def ordenar():
     ordem = interface.menu_ordenacao()
 
     if ordem == "stock":
-        stock = repo.bubble_sort_ord_by_name(repo.listar_tudo(),"stock")
+        stock = repo.bubble_sort_ord_by_date(repo.listar_tudo(),"stock")
         interface.mostrar_lista(stock,"ORDENADO POR STOCK")
 
     if ordem == "data":
 
         print("═════ TIPO DE ORDENAÇÃO ═════")
-        print(" [ 1 ] - Decrescente [mais novo - mais antigo] ")
-        print(" [ 2 ] - Crescente   [mais antigo - mais novo]")
+        print(" [ 1 ] - Crescente   [mais antigo - mais novo]")
+        print(" [ 2 ] - Decrescente [mais novo - mais antigo] ")
         
         while True:
             opc = input("\nEscolha a opção desejada: ").strip()
             if opc in ["1","2"]:
                 break
-        
-        
+       
         result = repo.selection_sort_ord_by_stock(repo.listar_tudo(),"data_registro")
-        interface.mostrar_lista(result,"ORDENADO POR DATA")
+       
+        if opc == "1":
+          result = result[::-1]
+          interface.mostrar_lista(result,"ORDENADO POR DATA")
+        else:
+          interface.mostrar_lista(result,"ORDENADO POR DATA")
 
-    if opc == 2:
-        result = result[::-1] # uso para inverter a lista
+    
 
 def estatisticas():
     
@@ -164,7 +169,8 @@ def editar():
    if r :
       interface.mostrar_lista([r], "Resultado por ID")       
    else:
-      print(f"Matérial com o ID {id} não encontrado") 
+      print(f"Matérial com o ID {id} não encontrado")
+      return
 
    update = interface.menu_update()
    
@@ -238,12 +244,12 @@ def remove():
     id = int(input("Insira o ID do máterial a remover: "))
 
     remove = repo.search_from_id(id)
-    interface.mostrar_lista([remove])
-
+    
     if not remove:
         print(f"[ERRO] Material com ID {id} não encontrado.")
         return
     
+    interface.mostrar_lista([remove])
     confirmar = input("Tem certeza que deseja remover este máterial ? (s/n): ").strip().lower()
 
     if confirmar == "s":

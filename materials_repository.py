@@ -66,20 +66,25 @@ def search_by_category(categoria: str):
             (categoria,)
         ).fetchall()
 
-def bubble_sort_ord_by_name(dados:list,campo:str) -> list :
+def bubble_sort_ord_by_date(dados:list,campo:str) -> list :
 
     arr = list(dados)
-    ind = {"id": 0, "nome": 1, "valor": 2, "categoria": 3, "stock": 4}[campo]
+    ind = {"id": 0, "nome": 1, "valor": 2, "categoria": 3, "stock": 4,"stock_minino": 5, "data_registro": 6}[campo]
     t = len(arr)
 
     for l in range(t):
-        for c in range (0,t - l - 1):
+        for c in range (0, t - l - 1):
             a,b = arr[c][ind],arr[c+1][ind]
 
             if isinstance(a,str):
-                a,b = a.lower(), b.lower()
+                try:
+                    a = datetime.strptime(a, "%d-%m-%Y")
+                    b = datetime.strptime(b, "%d-%m-%Y")
+                except ValueError:
+                 a,b = a.lower(), b.lower()
+            
             if a > b :
-                arr[c], arr[c + 1] = arr[ l + 1], arr[l]
+                arr[c], arr[c + 1] = arr[ c + 1], arr[c]
     return arr
 
 def selection_sort_ord_by_stock(dados:list,campo:str) -> list:

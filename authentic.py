@@ -1,3 +1,4 @@
+from ast import While
 import sys
 import os
 
@@ -64,39 +65,43 @@ def login ():
         return False
 
 def criar_conta():
-
+ while True:
+        
     print("\n-------- CRIAR CONTA --------")
     print("[IMPORTANTE] : Para criar um login são necessários pelo menos 3 meses de contrato\n")
 
-    email = input("Email: ").strip()
+    email = input("\nEmail: ").strip()
     ok,msg = validar_email(email)
    
     if not ok:
         print(f"ERRO ! {msg}")
-        return
+        continue
     
     print("[PASSWORD] : não esqueca que tem que conter mín.8 caracteres. 1 maiúscula, 1 minúscula, 1 número e 1 caractere ! ? @ # $ % ^ & * ( ) _ + \ - = ")
-    password = input("Password: ").strip()
+    password = input("\nPassword: ").strip()
     ok,msg = validar_password(password)
     if not ok:
         print(f"ERRO ! {msg}")
-        return
+        continue
     
-    password_confirmation = input("Digite novamente a password para confirmar: ").strip()
+    password_confirmation = input("\nDigite novamente a password para confirmar: ").strip()
     if password != password_confirmation:
         print("ERRO ! As passwords não coincidem !")
+        continue
     
-    data= input("Data de integração (DD - MM - AAAA) : ").strip()
+    data= input("\nData de integração (DD - MM - AAAA) : ").strip()
     ok,msg = validar_antiguidade(data)
     if not ok:
         print(f"ERRO ! {msg}")
-        return
+        continue
     
     sucess,resposta = criar_utilizador(email, password, data)
     if sucess:
         print(f"\n[--LOGIN ACEITE--] {resposta} ")
+        break
     else:
         print(f"[ERRO] {resposta}")
+        continue
 
     
 
