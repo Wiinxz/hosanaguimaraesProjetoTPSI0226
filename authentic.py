@@ -11,13 +11,13 @@ def summary ():
     """
     Primeiro crio um dicioário para guardar email e role do utilizador atual.
 
-    def sessao_ativa que retorna o email se nao for null.
+    def sessao_ativa que retorna o id se nao for null.
 
     def is_admin que valida se o role é do admin.
 
     def logout altera o estado do email e da role para none (reseta) para terminar a sessão.
 
-    def login imprime a janela aonde tem um input que pede o email e transforma em strip, utilizo o unpacking novamente para separar os valores da tupla em variaveis individuais sendo "ok=False" e "msg=True".
+    def login imprime a janela aonde tem um input que pede o email e transforma em strip, utilizo o unpacking para separar os valores da tupla em variaveis individuais sendo "ok=False" e "msg=True".
     depois pede password e pega os 2 dados e coloca na variavel utlizador que chama o método autenticar passando emaile pass, se true depois passa os valores para o dicionario session mostra mensagem de bem vindo e retorna True, 
     se nao retorna False e menssagem de erro.
 
