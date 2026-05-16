@@ -35,7 +35,7 @@ def loop_inicial():
 
             case "6":
              if auth.is_admin():
-                criar()
+               criar()
              else:
                 print("[ERRO] Acesso negado. Apenas administradores.")              
 
