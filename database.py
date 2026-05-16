@@ -60,9 +60,3 @@ def criar_tabelas():
             INSERT OR IGNORE INTO users (email,password,data_integracao,role)
             VALUES ('admin@clinica.pt','Admin123.','01-01-2020','admin')
         """)
-
-
-    
-
-
-        

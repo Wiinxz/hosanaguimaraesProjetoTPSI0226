@@ -10,7 +10,59 @@ import users_repository as users_repository
 import materials_repository as repo
 import interface as interface
 
+ 
+def testes():
+     print()
+    #print(validadores.validar_email("admin_clin@clinica.pt"))
+    #print(validadores.validar_password("Admin123!"))
+    #print(validadores.validar_data("00-00-0000"))
+    #print(validadores.validar_antiguidade("24-01-2026"))
 
+    
+    #print(db.autenticar("admin@clinica.pt","Admin123."))
+    #print(db.criar_utilizador("admin@clinica.pt","Admin123.","01-01-2020"))
+    #print(db.criar_utilizador("teste@testando.pt","Teste123!","03-05-2026"))
+
+    #print("Teste criar conta ")
+    #authentic.criar_conta()
+
+    #print("Teste login")
+    #authentic.login()
+    
+    #interface.menu_principal()
+    #listando = repo.listar_tudo()
+    #print(listando)
+
+    #procura_id = int(input("insere um ID"))
+    #print(repo.search_from_id(procura_id))
+
+    #atualiza_material = int(input("insere um ID: "))
+    #print(repo.search_from_id(atualiza_material))
+    
+    #print(repo.materials_update("Pasta Colgate", 1.98, "Consumiveis", 120, 50, 1))
+    #repo.remove_materials(atualiza_material)
+
+    #print(f"Teste sessão ativa: {authentic.sessao_ativa()}")
+    #print(f"Teste admin: {authentic.is_admin()}")
+
+    #Chamar apenas para logout
+    #print(f"Teste logout:{authentic.logout()}")
+    
+    #print(f"Sessão ainda ativa? {authentic.sessao_ativa()}")
+    
+    #print("teste criar material ")
+    #print(materials_repository.criar_material("Pasta Sensodyne","1.59","Consumiveis","100","50","1"))
+
+    #NÃO ESQUECER ! APENAS O ADMIN PODE DELETAR PRODUTOS LEMBRAR QUANDO CONSTRUIR O ' MAIN '
+    #Talvez implementar adição e remoção de usuários? fazer validação para que o admin não possa se remover
+    
+    #interface.menu_principal()
+    #interface.menu_pesquisa()
+    #interface.menu_ordenacao()
+    #interface.menu_estatisticas()
+
+
+# iniciamos aqui :) 
 def loop_inicial():
   
   while True:
@@ -31,7 +83,7 @@ def loop_inicial():
                  estatisticas()
 
             case "5":
-                editar() #Criar o editar
+                editar()
 
             case "6":
              if auth.is_admin():
@@ -123,8 +175,6 @@ def ordenar():
           interface.mostrar_lista(result,"ORDENADO POR DATA")
         else:
           interface.mostrar_lista(result,"ORDENADO POR DATA")
-
-    
 
 def estatisticas():
     
@@ -260,69 +310,10 @@ def remove():
 
 
 if __name__ == "__main__":
- def testes():
-  
-    """print(validadores.validar_email("admin_clin@clinica.pt"))
-    print(validadores.validar_password("Admin123!"))
-    print(validadores.validar_data("00-00-0000"))
-    print(validadores.validar_antiguidade("24-01-2026"))"""
+ 
+ db.criar_tabelas()
 
-    
-    #print(db.autenticar("admin@clinica.pt","Admin123."))
-    #print(db.criar_utilizador("admin@clinica.pt","Admin123.","01-01-2020"))
-    #print(db.criar_utilizador("teste@testando.pt","Teste123!","03-05-2026"))
-
-    #print("Teste criar conta ")
-    #authentic.criar_conta()
-
-    #print("Teste login")
-    #authentic.login()
-    
-    #interface.menu_principal()
-    #listando = repo.listar_tudo()
-    #print(listando)
-
-    #procura_id = int(input("insere um ID"))
-    #print(repo.search_from_id(procura_id))
-
-    #atualiza_material = int(input("insere um ID: "))
-    #print(repo.search_from_id(atualiza_material))
-    
-    #print(repo.materials_update("Pasta Colgate", 1.98, "Consumiveis", 120, 50, 1))
-    #repo.remove_materials(atualiza_material)
-
-    #print(f"Teste sessão ativa: {authentic.sessao_ativa()}")
-    #print(f"Teste admin: {authentic.is_admin()}")
-
-    #Chamar apenas para logout
-    #print(f"Teste logout:{authentic.logout()}")
-    
-    #print(f"Sessão ainda ativa? {authentic.sessao_ativa()}")
-    
-    #print("teste criar material ")
-    #print(materials_repository.criar_material("Pasta Sensodyne","1.59","Consumiveis","100","50","1"))
-
-    #NÃO ESQUECER ! APENAS O ADMIN PODE DELETAR PRODUTOS LEMBRAR QUANDO CONSTRUIR O ' MAIN '
-    #Talvez implementar adição e remoção de usuários? fazer validação para que o admin não possa se remover
-    
-    #interface.menu_principal()
-    #interface.menu_pesquisa()
-    #interface.menu_ordenacao()
-    #interface.menu_estatisticas()
-
-db.criar_tabelas()
-
-if auth.login():
+ if auth.login():
   loop_inicial()
 
-  
-
-
-
-
-
-
-
-
-
-
+  #883 linhas de código, 7 arquivos, 1 database e mto suor!

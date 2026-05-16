@@ -89,15 +89,3 @@ def validar_antiguidade(data_integracao: str) -> tuple:
     if calcular_meses < 3 :
         return False, (f" São necessários pelo menos 3 meses na empresa para criar login. A data {data_integracao} tem apenas {calcular_meses} mês(es).")
     return True, ""                                   
-
-
-
-
-
-
-    
-
-
-
-
-

@@ -77,7 +77,7 @@ def criar_conta():
         print(f"ERRO ! {msg}")
         continue
     
-    print("[PASSWORD] : não esqueca que tem que conter mín.8 caracteres. 1 maiúscula, 1 minúscula, 1 número e 1 caractere ! ? @ # $ % ^ & * ( ) _ + \ - = ")
+    print("\n[PASSWORD] : não esqueca que tem que conter mín.8 caracteres. 1 maiúscula, 1 minúscula, 1 número e 1 caractere ! ? @ # $ % ^ & * ( ) _ + \ - = ")
     password = input("\nPassword: ").strip()
     ok,msg = validar_password(password)
     if not ok:

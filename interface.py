@@ -45,7 +45,6 @@ def menu_pesquisa():
         elif op == "4": return op
         else: print("[ERRO] Escolha uma opção entre 1 e 4.")
 
-
 def menu_ordenacao():
     print("\n╔══════════════════════════════════════════╗")
     print("║        ORDENAR POR                       ║")
@@ -149,5 +148,3 @@ def mostrar_lista(materiais, titulo="LISTA DE MATERIAIS"):
     print("─" * 105)
 
     #criar validação de inputs seguros? ver depois
-
-
