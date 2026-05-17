@@ -61,7 +61,6 @@ def testes():
     #interface.menu_ordenacao()
     #interface.menu_estatisticas()
 
-
 # iniciamos aqui :) 
 def loop_inicial():
   
@@ -70,8 +69,7 @@ def loop_inicial():
 
     match op:
             case "1":
-               materials = repo.listar_tudo()
-               interface.mostrar_lista(materials)
+               listar()
 
             case "2":
                pesquisar()
@@ -99,7 +97,7 @@ def loop_inicial():
             
             case "8":
                if auth.is_admin():
-                   auth.criar_conta()
+                  auth.criar_conta()
                else:
                     print("[ERRO] Acesso negado. Apenas administradores.")
 
@@ -154,21 +152,21 @@ def ordenar():
     ordem = interface.menu_ordenacao()
 
     if ordem == "stock":
-        stock = repo.bubble_sort_ord_by_date(repo.listar_tudo(),"stock")
+        stock = repo.selection_sort_ord_by_stock(repo.listar_tudo(),"stock")
         interface.mostrar_lista(stock,"ORDENADO POR STOCK")
 
     if ordem == "data":
 
         print("═════ TIPO DE ORDENAÇÃO ═════")
-        print(" [ 1 ] - Crescente   [mais antigo - mais novo]")
-        print(" [ 2 ] - Decrescente [mais novo - mais antigo] ")
+        print(" [ 1 ] - Decrescente   [mais antigo - mais novo]")
+        print(" [ 2 ] - Crescente     [mais novo - mais antigo] ")
         
         while True:
             opc = input("\nEscolha a opção desejada: ").strip()
             if opc in ["1","2"]:
                 break
        
-        result = repo.selection_sort_ord_by_stock(repo.listar_tudo(),"data_registro")
+        result = repo.bubble_sort_ord_by_date(repo.listar_tudo(),"data_registro")
        
         if opc == "1":
           result = result[::-1]

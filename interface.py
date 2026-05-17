@@ -62,7 +62,7 @@ def menu_estatisticas():
     print("\n╔══════════════════════════════════════════╗")
     print("║        ESTATÍSTICAS                      ║")
     print("╠══════════════════════════════════════════╣")
-    print("║  1. RESUMO ESTATISTICO?                  ║")
+    print("║  1. RESUMO ESTATISTICO                   ║")
     print("║  2. MATERIAIS COM STOCK ABAIXO DO MÍNIMO ║")
     print("║  3. SAIR                                 ║")
     print("╚══════════════════════════════════════════╝")
@@ -147,4 +147,4 @@ def mostrar_lista(materiais, titulo="LISTA DE MATERIAIS"):
         linha_material(m)
     print("─" * 105)
 
-    #criar validação de inputs seguros? ver depois
+    

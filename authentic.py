@@ -1,4 +1,3 @@
-from ast import While
 import sys
 import os
 
@@ -23,12 +22,13 @@ def summary ():
 
     def criar_conta recebe um input email e transforma em strip e depois pede password (input) e valida novamente, depois pede a data de integração para ver se já esta há pelo menos 3 meses na clinica.
     utilizo o unpacking novamente para separar os valores da tupla em variaveis individuais sendo "resposta=False" e "sucess=True" chamo a def criar_utilizador para inserir depois na DB.
+
     """
 
 # funções da minha sessão
 session = {"id":None,"email": None,"role": None,}
 
-def sessao_ativa():
+def sessao_ativa(): # acabei por não usar essa função
     return session["id"] is not None
 
 def is_admin():
@@ -93,7 +93,7 @@ def criar_conta():
     ok,msg = validar_antiguidade(data)
     if not ok:
         print(f"ERRO ! {msg}")
-        continue
+        break
     
     sucess,resposta = criar_utilizador(email, password, data)
     if sucess:

@@ -26,10 +26,9 @@ def search_from_id (id:int):
 
 def criar_material(nome,valor,categoria,stock,stock_minimo,user_id):
     
-    #não esquecer, tenho que validar a sessão ativa aqui para obter o user_id já pre preenchido !!!!!
     data = datetime.now().strftime("%d-%m-%Y")
     with get_connection() as conn:
-        conection = conn.execute(
+        conn.execute(
             "INSERT INTO materiais (nome,valor,categoria,stock,stock_minimo,data_registro,user_id) VALUES (?,?,?,?,?,?,?)",(nome,valor,categoria,stock,stock_minimo,data,user_id)
         )
         conn.commit()
@@ -41,6 +40,8 @@ def materials_update(nome,valor,categoria,stock,stock_minino,id):
         conn.execute(
             "UPDATE materiais SET nome=?, valor=?, categoria=?, stock=?, stock_minimo=? WHERE id=?",(nome,valor,categoria,stock,stock_minino,id)
         )
+        conn.commit()
+        return "Produto actualizado com sucesso !"
 
 def remove_materials(id:int):
   
@@ -49,7 +50,7 @@ def remove_materials(id:int):
     
       return "Produto removido com sucesso !"
 
-def search_linear_name(nome_search: str):
+def search_linear_name( nome_search: str):
     
     resultado = []
     for n in listar_tudo():
@@ -104,7 +105,7 @@ def selection_sort_ord_by_stock(dados:list,campo:str) -> list:
             
             if a > b:
                 min = c
-                arr[l],arr[min] = arr[min],arr[l]
+        arr[l],arr[min] = arr[min],arr[l]
     return arr
 
 def statistics():
@@ -124,20 +125,3 @@ def statistics():
         "stock_total"  : sum(stocks),
         "abaixo_minimo": [m for m in todos if m[4] <= m[5]]
     }
-
-def search_linear_id(id:int):
-    
-    all = listar_tudo()
-    esq,dir = 0,len(all) -1
-
-    while esq <= dir:
-        meio = (esq+dir) // 2
-        
-        if all[meio][0] == id:
-            return all[meio]
-        
-        elif all[meio][0] < id:
-            esq = meio + 1
-        else: 
-            id = meio - 1
-    return None 
