@@ -1,99 +1,161 @@
-# Sistema de Gestão de Stock — Clínica Dentária
+# 🦷 Sistema de Gestão de Stock — Clínica Dentária
 
- Projeto desenvolvido em Python como um modelo básico para gestão de stock de uma clinica dentária com autenticação de sessão, CRUD, algoritimos de ordenação e análise estatística de stock.
+Aplicação de terminal desenvolvida em **Python** para gestão de materiais de uma clínica dentária, com autenticação por sessão, controlo de acessos por role, operações CRUD, algoritmos de ordenação e análise estatística de stock.
 
- O projeto está dividido em 7 ficheiros e 1 Database, sendo essa a estrutura:
-       
+***
 
-## Estrutura do Projeto 
+## 📋 Funcionalidades
+
+### Utilizador comum (User)
+- Listar todos os materiais registados
+- Pesquisar materiais por **ID**, **Nome** ou **Categoria**
+- Ordenar materiais por **quantidade em stock** (Selection Sort) ou por **data de registo** (Bubble Sort — crescente/decrescente)
+- Ver **estatísticas** completas: total de registos, valor mínimo/médio/máximo, stock total e alertas de stock abaixo do mínimo
+- Ver listagem de materiais com **stock abaixo do mínimo**
+- **Editar** um material (por ID) — alterar nome, valor, categoria, stock ou stock mínimo
+- **Logout** para terminar sessão
+
+### Administrador (Admin)
+Todas as funcionalidades do utilizador comum, mais:
+- **Adicionar** novo material (nome, valor, categoria, stock inicial e stock mínimo)
+- **Remover** material por ID, com confirmação da operação
+- **Criar conta** de utilizador com validação de email, password e antiguidade mínima de 3 meses na clínica
+
+***
+
+## 🗂️ Estrutura do Projeto
 
 ```
 hosanaguimaraesProjetoTPSI0226/
-├── dental_stock.py
-├── database.py
-├── validadores.py
-├── authentic.py
-├── users_repository.py
-├── materials_repository.py
-├── interface.py
-└── main.db
+├── main.py                  # Ponto de entrada e fluxo principal
+├── interface.py             # Menus e visualização no terminal
+├── materials_repository.py  # CRUD, ordenação e estatísticas de materiais
+├── users_repository.py      # Criação e autenticação de utilizadores
+├── authentic.py             # Gestão de sessão (login, logout, roles)
+├── validadores.py           # Validação com REGEX (email, password, data)
+├── database.py              # Configuração e criação da base de dados
+└── dental_stock.db          # Base de dados SQLite
 ```
 
-## Ficheiros
+***
 
+## 🧩 Descrição dos Módulos
 
-### `Main.py` - Ficheiro inicial! Ponto de entrada da aplicação. Inicializa a base de dados, executa o loop principal e chama todos os métodos implementados nos restantes módulos gerindo assim o fluxo de navegção do utilizador.
+### `database.py`
+Configura e inicializa a base de dados SQLite. O caminho é construído dinamicamente com `os.path` para garantir portabilidade entre sistemas e máquinas diferentes. Cria as tabelas `materiais` e `users` e insere o utilizador `admin` por defeito.
+
+| Tabela | Campos principais |
+|--------|-------------------|
+| `materiais` | id, nome, valor, categoria, stock, stock_minimo, data_registro, user_id |
+| `users` | id, email, password, data_integracao, role |
 
 ***
 
-### `Interface.py` - Responsável pela apresentação visual da aplicação no terminal. 
-Contém métodos para:
-- Exibir os menus maiores de navegação formtados
-- Apresentar a tabela de materiais de forma organizada e legível
-- Exibe também alguns alertas visuais
+### `validadores.py`
+Contém todas as validações com **expressões regulares (REGEX)**, construídas com apoio do site [regex101.com](https://regex101.com):
 
-***
-   
-### `Materials_repository.py` - Contém toda a lógica implementada no projeto para manipulação dos dados relativos aos materiais existentes na database. Implementa:
-     
-     - **Implementação do CRUD** - Create,Read(all),Update & Delete
-     - **listagens** - Listagens totais e por categoria
-     - **Pesquisa** - Pesquisa avançada por ID,Nome e Categoria
-     - **Ordenação de listagens:**
-       - Por **STOCK** utiliza o algoritimo [SELECTION SORT] e 
-       - Por **DATA** utiliza o algoritimo [BUBBLE SORT] (crescente / decrescente)
-     - **Estatísticas :**
-        - Resumo estatístico com total de registros, valores dos produtos mínimos/médios/máximos, stock total
-        - Identificação e listagem de máteriais com o stock abaixo do mínimo definido
+| Validador | Critérios |
+|-----------|-----------|
+| **Email** | Aceita caracteres especiais (`-.+`) antes do `@`; mínimo 2 letras após o último ponto |
+| **Password** | Mínimo 8 caracteres; obrigatório: 1 maiúscula, 1 minúscula, 1 número, 1 carácter especial |
+| **Data** | Formato `DD-MM-AAAA`; dia 01-31, mês 01-12, ano com 4 dígitos |
+| **Antiguidade** | Mínimo 3 meses de contrato na clínica para criação de conta |
 
 ***
 
-
-### `Users_repository` - Contém toda a lógica implementada no projeto para manipulação dos dados relativos aos utilizadores
-
-      - criação de novo utilizador na database
-      - Autenticação de utilizador a database (verificação de email e password)
+### `authentic.py`
+Gere a sessão ativa através de um dicionário `session` com os campos `id`, `email` e `role`. Implementa login com validação de credenciais, criação de conta com loop de validação, verificação de role admin e logout.
 
 ***
 
-
-### `Authentic.py `- Gere a sessão ativa do utilizador. Contém métodos para:
-
-    - **Login** - Validação de credenciais para inicio de sessão
-    - **Criação de login** - Registro de novo utilizador com validação de dados
-    - **Validação de sessão ativa** - confirma se existe um utilizador autenticado
-    - **Verificação de admin** - restringe as funcionalidades apenas desa role 
-    - **logout** - termina a sessão atual
+### `users_repository.py`
+Contém duas funções de acesso à base de dados:
+- `criar_utilizador` — insere novo utilizador e devolve `True/False` com mensagem
+- `autenticar` — valida email e password contra a base de dados com `fetchone()`
 
 ***
 
- 
-### `Validadores.py` - Módulo de validação de dados utilizados no registro e login.
-Todas as validações são implementadas com **espressões regulares (REGEX)**:
- 
- - Validação de formato de **email**
- - Validação de **password** (mín: 8 caracteres, sendo 1 maiúscula, 1 minúscula, 1 número e pelo menos 1 caráctere especial predefinido por mim)
- - Vlidação de **data de integração** e antiguidade mínima de contato(3 meses)
+### `materials_repository.py`
+Módulo principal com toda a lógica de materiais:
+
+- **CRUD completo** — listar, criar, editar, remover
+- **Pesquisa** — por ID (linear), por nome (linear com `lower()`), por categoria (query SQL)
+- **Selection Sort** — ordena por stock de forma decrescente; identifica o maior elemento em cada passagem e efetua a troca apenas no final do ciclo interno
+- **Bubble Sort** — ordena por data de registo de forma crescente; compara elementos adjacentes e troca-os quando necessário; usa `datetime.strptime()` para comparação correta de datas
+- **Estatísticas** — total de registos, valor mínimo/médio/máximo, stock total e listagem de materiais com stock abaixo do mínimo
 
 ***
 
-### `dental_stock.db`
-Base de dados SQLite com os dados persistentes da aplicação.
-
-| Tabela | Descrição |
-|--------|-----------|
-| `materiais` | Registo de todos os materiais clínicos com stock, valor e categoria |
-| `users` | Utilizadores com email, password e role (admin / user) |
+### `interface.py`
+Responsável por toda a apresentação visual no terminal. Usa **f-strings com formatação de alinhamento** (`:<` para esquerda, `:>` para direita) para apresentar os dados em forma de tabela organizada. Inclui alerta visual (⚠️) sempre que o stock de um material estiver abaixo do mínimo definido.
 
 ***
 
-## Tecnologias Utilizadas
+### `main.py`
+Ponto de entrada da aplicação. Inicializa as tabelas, autentica o utilizador e gere o fluxo principal com um `match/case` para cada opção do menu. As funcionalidades exclusivas do admin são verificadas com `auth.is_admin()` antes de serem executadas.
+
+***
+
+## 🔐 Controlo de Acessos
+
+| Funcionalidade | User | Admin |
+|----------------|:----:|:-----:|
+| Listar materiais | ✅ | ✅ |
+| Pesquisar materiais | ✅ | ✅ |
+| Ordenar materiais | ✅ | ✅ |
+| Ver estatísticas | ✅ | ✅ |
+| Editar material | ✅ | ✅ |
+| Adicionar material | ❌ | ✅ |
+| Remover material | ❌ | ✅ |
+| Criar utilizador | ❌ | ✅ |
+
+***
+
+## ⚙️ Algoritmos de Ordenação
+
+| Algoritmo | Campo | Ordem base | Ficheiro |
+|-----------|-------|-----------|----------|
+| **Selection Sort** | Stock (quantidade) | Decrescente | `materials_repository.py` |
+| **Bubble Sort** | Data de Registo | Crescente (`[::-1]` para inverter) | `materials_repository.py` |
+
+***
+
+## 🛠️ Tecnologias Utilizadas
 
 | Tecnologia | Utilização |
 |------------|------------|
 | Python 3 | Linguagem principal |
-| SQLite3 | Base de dados local |
-| REGEX (`re`) | Validação de dados |
+| SQLite3 (built-in) | Base de dados local sem servidor |
+| `re` (REGEX) | Validação de email, password e data |
 | `datetime` | Manipulação e comparação de datas |
+| `os.path` | Caminho dinâmico para a base de dados |
 
 ***
+
+## ▶️ Como executar
+
+1. Clonar o repositório:
+```bash
+git clone https://github.com/hosana/hosanaguimaraesProjetoTPSI0226.git
+cd hosanaguimaraesProjetoTPSI0226
+```
+
+2. Executar a aplicação:
+```bash
+python main.py
+```
+
+> Não são necessárias instalações adicionais. Todas as bibliotecas utilizadas são nativas do Python :)).
+
+**Credenciais de admin por defeito:**
+```
+Email:    admin@clinica.pt
+Password: Admin123!
+```
+
+***
+
+## 👩‍💻 Autora
+
+**Hosana Guimarães**
+ Projeto UC-0620 — TPSI 2026
