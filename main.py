@@ -158,8 +158,8 @@ def ordenar():
     if ordem == "data":
 
         print("═════ TIPO DE ORDENAÇÃO ═════")
-        print(" [ 1 ] - Decrescente   [mais antigo - mais novo]")
-        print(" [ 2 ] - Crescente     [mais novo - mais antigo] ")
+        print(" [ 1 ] - Decrescente   [mais novo - mais antigo]")
+        print(" [ 2 ] - Crescente     [mais antigo - mais novo] ")
         
         while True:
             opc = input("\nEscolha a opção desejada: ").strip()
